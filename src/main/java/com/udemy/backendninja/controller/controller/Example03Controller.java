@@ -9,10 +9,23 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @RequestMapping("/example03")
 public class Example03Controller {
+
+    /* Primera forma
+    @GetMapping("/")
+    public String redirect(){
+        return "redirect:/example03/showForm";
+    }*/
+
+    // Segunda Forma
+    @GetMapping("/")
+    public RedirectView redirect(){
+        return new RedirectView("/example03/showForm");
+    }
 
     @GetMapping("/showForm")
     public String showForm(Model model){
