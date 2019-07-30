@@ -2,6 +2,8 @@ package com.udemy.backendninja.controller.controller;
 
 import com.udemy.backendninja.controller.Constante;
 import com.udemy.backendninja.controller.model.Person;
+import org.apache.juli.logging.Log;
+import org.apache.juli.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,8 @@ import org.springframework.web.servlet.view.RedirectView;
 @Controller
 @RequestMapping("/example03")
 public class Example03Controller {
+
+    private static final Log LOGGER = LogFactory.getLog(Example03Controller.class);
 
     /* Primera forma
     @GetMapping("/")
@@ -29,14 +33,19 @@ public class Example03Controller {
 
     @GetMapping("/showForm")
     public String showForm(Model model){
+//        LOGGER.info("INFO TRACE");
+//        LOGGER.warn("WARNING TRACE");
+//        LOGGER.error("ERROR TRACE");
+//        LOGGER.debug("DEBUG TRACE");
         model.addAttribute("person", new Person());
 //        Exception RuntimeException
-        int number = 6 / 0;
+//        int number = 6 / 0;
         return Constante.FORM_VIEW;
     }
 
     @PostMapping("/addperson")
     public ModelAndView addPerson(@ModelAttribute("person") Person person){
+        LOGGER.info("METHOD: 'addPerson' -- PARAMS: '" + person + "'" );
         ModelAndView mav = new ModelAndView(Constante.RESULT_VIEW);
         mav.addObject("person", person);
         return mav;
