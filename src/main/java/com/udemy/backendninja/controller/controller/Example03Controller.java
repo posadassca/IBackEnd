@@ -48,6 +48,7 @@ public class Example03Controller {
         LOGGER.info("METHOD: 'addPerson' -- PARAMS: '" + person + "'" );
         ModelAndView mav = new ModelAndView(Constante.RESULT_VIEW);
         mav.addObject("person", person);
+        LOGGER.info("TEMPLATE: '" + Constante.RESULT_VIEW + "'" + " -- DATA: '" + person + "'");
         return mav;
     }
 }
