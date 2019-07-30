@@ -30,6 +30,8 @@ public class Example03Controller {
     @GetMapping("/showForm")
     public String showForm(Model model){
         model.addAttribute("person", new Person());
+//        Exception RuntimeException
+        int number = 6 / 0;
         return Constante.FORM_VIEW;
     }
 

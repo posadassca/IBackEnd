@@ -8,5 +8,6 @@ public class Constante {
     public static final String RESULT_VIEW = "result";
     public static final String EXAMPLE04_ERROR = "404";
     public static final String EXAMPLE04_STATUS = "500";
+    public static final String INTERNAL_SERVER_ERROR_VIEW = "error/500";
 
 }
