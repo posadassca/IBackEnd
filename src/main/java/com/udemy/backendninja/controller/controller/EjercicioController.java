@@ -1,6 +1,10 @@
 package com.udemy.backendninja.controller.controller;
 
 import com.udemy.backendninja.controller.Constante;
+import com.udemy.backendninja.controller.service.EjercicioService;
+import com.udemy.backendninja.controller.service.ExampleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,19 +15,20 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequestMapping("/ejercicio")
 public class EjercicioController {
 
-    
-    @GetMapping("/path01")
-    public RedirectView redirect(){
+    @Autowired
+    @Qualifier("ejercicioService")
+    private EjercicioService ejercicioService;
+
+    @GetMapping("/show")
+    public RedirectView redirect() {
+        ejercicioService.mostrarLog();
         return new RedirectView("/ejercicio/path02");
     }
 
-//    @GetMapping("/path01")
-//    public String primerPath(){
-//        return Constante.PATH01;
-//    }
-
     @GetMapping("/path02")
-    public String segundoPath(){
-        return Constante.PATH02;
+    public ModelAndView segundoPath() {
+        ModelAndView mav = new ModelAndView(Constante.RESULTEJERCICIO);
+        mav.addObject("mensaje", ejercicioService.mensaje());
+        return mav;
     }
 }
