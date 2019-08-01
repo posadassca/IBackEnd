@@ -6,40 +6,35 @@ import javax.persistence.*;
 @Table(name="course")
 public class Course {
 
-    @Id
-    @GeneratedValue
-    @Column(name="id")
-    private int id;
 
-    @Column(name="name")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String name;
 
-    @Column(name="description")
     private String description;
 
-    @Column(name = "price")
     private int price;
 
-    @Column(name = "hours")
     private int hours;
 
     public Course() {
     }
 
-    public Course(int id, String name, String description, int price, int hours) {
+    public Course(String name, String description, int price, int hours) {
         super();
-        this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.hours = hours;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -73,5 +68,16 @@ public class Course {
 
     public void setHours(int hours) {
         this.hours = hours;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", hours=" + hours +
+                '}';
     }
 }
