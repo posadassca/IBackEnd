@@ -9,5 +9,7 @@ public class Constante {
     public static final String EXAMPLE04_ERROR = "404";
     public static final String EXAMPLE04_STATUS = "500";
     public static final String INTERNAL_SERVER_ERROR_VIEW = "error/500";
+    public static final String PATH01 = "path01";
+    public static final String PATH02 = "path02";
 
 }
