@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @RequestMapping("/course")
@@ -25,9 +26,14 @@ public class CourseController {
     @Qualifier("courseService")
     private CourseService courseService;
 
+    @GetMapping("/")
+    public RedirectView redirectView(){
+        return new RedirectView("/course/listcourses");
+    }
+
     @GetMapping("/listcourses")
     public ModelAndView listCourses(){
-        LOG.info("Call: " + "listCourses()");
+        LOG.info("Call: " + "listCcourses()");
         ModelAndView mav = new ModelAndView(Constante.COURSES_VIEW);
         mav.addObject("course", new Course());
         mav.addObject("courses", courseService.listAllCourses());
@@ -38,7 +44,7 @@ public class CourseController {
     public String addCourse(@ModelAttribute("course") Course course){
         LOG.info("Call: " + "addCourse()" + " -- Param: " + course.toString() );
         courseService.addCourse(course);
-        return "redirect:/courses/listCourses";
+        return "redirect:/course/listcourses";
     }
 
 }
