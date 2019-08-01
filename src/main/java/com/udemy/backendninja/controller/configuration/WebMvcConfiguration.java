@@ -14,7 +14,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
     @Autowired
     public WebMvcConfiguration(@Qualifier("requestTimeInterceptor") RequestTimeInterceptor requestTimeInterceptor) {
-        this.requestTimeInterceptor = requestTimeInterceptor; 
+        this.requestTimeInterceptor = requestTimeInterceptor;
     }
 
     @Override
