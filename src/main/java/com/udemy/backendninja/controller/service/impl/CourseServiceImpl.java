@@ -1,6 +1,8 @@
 package com.udemy.backendninja.controller.service.impl;
 
+import com.udemy.backendninja.controller.converter.CourseConverter;
 import com.udemy.backendninja.controller.entity.Course;
+import com.udemy.backendninja.controller.model.CourseModel;
 import com.udemy.backendninja.controller.repository.CourseJpaRepository;
 import com.udemy.backendninja.controller.service.CourseService;
 import org.apache.commons.logging.Log;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("courseService")
@@ -21,17 +24,23 @@ public class CourseServiceImpl implements CourseService {
     @Qualifier("courseJpaRepository")
     private CourseJpaRepository courseJpaRepository;
 
+    @Autowired
+    @Qualifier("courseConverter")
+    private CourseConverter courseConverter;
 
     @Override
-    public List<Course> listAllCourses() {
+    public List<CourseModel> listAllCourses() {
         LOG.info("Call: " + "listAllCourses()");
-        return courseJpaRepository.findAll();
+        List<CourseModel> courseModels;
+        List<Course> courses = courseJpaRepository.findAll();
+        courseModels = courseConverter.listEntityToModel(courses);
+        return courseModels;
     }
 
     @Override
-    public Course addCourse(Course course) {
+    public void addCourse(CourseModel courseModel) {
         LOG.info("Call: " + "addCourse()");
-        return courseJpaRepository.save(course);
+        courseJpaRepository.save(courseConverter.modelToEntity(courseModel));
     }
 
     @Override
@@ -42,8 +51,12 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public Course updateCourse(Course course) {
+    public void updateCourse(CourseModel courseModel) {
         LOG.info("Call: " + "updateCourse()");
-        return courseJpaRepository.save(course);
+        Course course = courseJpaRepository.findByName(courseModel.getName());
+        course.setDescription(courseModel.getDescription());
+        course.setPrice(courseModel.getPrice());
+        course.setHours(courseModel.getHours());
+        courseJpaRepository.save(course);
     }
 }

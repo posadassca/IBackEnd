@@ -11,5 +11,7 @@ public class Constante {
     public static final String INTERNAL_SERVER_ERROR_VIEW = "error/500";
     public static final String RESULTEJERCICIO = "resultEjercicio";
     public static final String COURSES_VIEW = "courses";
+    public static final String COURSES = "redirect:/course/listcourses";
+
 
 }
