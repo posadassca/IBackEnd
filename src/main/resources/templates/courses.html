@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Courses</title>
+</head>
+<body>
+    <Table>
+        <thead>
+            <tr>
+                <th>Name </th>
+                <th>Description </th>
+                <th>Price </th>
+                <th>Hours </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="course : ${courses}">
+                <!-- Al ser un objeto, se lo trata con ${} -->
+                <th> <span th:text="${course.name}"></span></th>
+                <th> <span th:text="${course.description}"></span></th>
+                <th> <span th:text="${course.price}"></span></th>
+                <th> <span th:text="${course.hours}"></span></th>
+            </tr>
+        </tbody>
+    </Table>
+
+    <p>Add Course</p>
+    <form action="#" th:action="@{/course/addcourse}" th:object="${course}" method="post">
+        <!-- Al ser un método, se lo trata con @{} -->
+        <p>Name: <input type="text" th:field="*{name}" /></p>
+        <p>Description: <input type="text" th:field="*{description}" /></p>
+        <p>Price: <input type="number" th:field="*{price}" /></p>
+        <p>Hours: <input type="number" th:field="*{hours}" /></p>
+        <!-- Al ser una referencia a un dato que vamos a enviar, se utiliza el *{} -->
+        <p><input type="submit" value="Submit"></p>
+    </form>
+
+    <p>Update Course</p>
+    <form action="#" th:action="@{/course/updatecourse}" th:object="${course}" method="post">
+        <!-- Al ser un método, se lo trata con @{} -->
+        <p>Name: <input type="text" th:field="*{name}" /></p>
+        <p>Description: <input type="text" th:field="*{description}" /></p>
+        <p>Price: <input type="number" th:field="*{price}" /></p>
+        <p>Hours: <input type="number" th:field="*{hours}" /></p>
+        <!-- Al ser una referencia a un dato que vamos a enviar, se utiliza el *{} -->
+        <p><input type="submit" value="Submit"></p>
+    </form>
+
+    <p>Remove Course</p>
+    <form action="#" th:action="@{/course/removecourse}" method="post">
+        <p>Curso ID: <input type="number" name="id"/></p>
+        <p><input type="submit" value="Submit"></p>
+    </form>
+
+</body>
+</html>
